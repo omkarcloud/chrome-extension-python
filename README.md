@@ -191,8 +191,8 @@ class CustomExtension(Extension):
 ## Examples of Custom Extensions
 Here are some code snippets of Custom Extensions to provide you with an idea of how to develop your own.
 
-- [Capsolver Extension](https://github.com/omkarcloud/capsolver-extension-python)
-- [2captcha Extension](https://github.com/omkarcloud/twocaptcha-extension-python)
+- [Capsolver Extension](https://github.com/omkarcloud/capsolver-extension-python/blob/master/capsolver_extension_python/__init__.py)
+- [2captcha Extension](https://github.com/omkarcloud/twocaptcha-extension-python/blob/master/twocaptcha_extension_python/__init__.py)
 
 ## Publishing Your Extension
 

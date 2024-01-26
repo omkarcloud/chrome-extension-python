@@ -198,7 +198,7 @@ Here are some code snippets of Custom Extensions to provide you with an idea of 
 
 If you wish to share your extension with other developers via PyPI, follow these steps:
 
-1. Clone the template repository: [capsolver-extension-python](https://github.com/omkarcloud/capsolver-extension-python).
+1. Clone the template repository: [capsolver-extension-python](https://github.com/omkarcloud/twocaptcha-extension-python).
 2. Replace references to "capsolver" with your extension's name.
 3. Rename the `capsolver_extension_python` folder to match your extension name.
 4. Insert your extension code in `__init__.py`.

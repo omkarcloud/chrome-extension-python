@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "upload": "rm -rf dist/ chrome_extension_python.egg-info  chrome_extension_python/package_storage.json MANIFEST && python setup.py sdist && pip install -e . && python -m twine upload dist/* --verbose",
+    "install": "rm -rf dist/ chrome_extension_python.egg-info chrome_extension_python/package_storage.json MANIFEST && python setup.py sdist && pip install -e .",
+    "local-install": "pip install ."
+  }
+}

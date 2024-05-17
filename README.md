@@ -25,16 +25,21 @@ Below are examples demonstrating the integration of the Adblock extension in eac
 Example with Adblock Extension:
 
 ```python
-from botasaurus import *
+from botasaurus.browser import browser, Driver
 from chrome_extension_python import Extension
 
 @browser(
-    extensions=[Extension("https://chromewebstore.google.com/detail/adblock-%E2%80%94-best-ad-blocker/gighmmpiobklfepjocnamgkkbiglidom")], 
-)  
-def open_chrome(driver: AntiDetectDriver, data):
+    extensions=[
+        # Simply pass the Chrome Extension Link
+        Extension(
+            "https://chromewebstore.google.com/detail/adblock-%E2%80%94-best-ad-blocker/gighmmpiobklfepjocnamgkkbiglidom"
+        )
+    ],
+)
+def scrape_while_blocking_ads(driver: Driver, data):
     driver.prompt()
 
-open_chrome()
+scrape_while_blocking_ads()
 ```
 
 ### Usage with Selenium
@@ -135,15 +140,14 @@ class Capsolver(Extension):
         for file in js_files:
             file.update_contents(update_js_contents)
 
-        # Retrieve the specific configuration JavaScript file
-        config_file = self.get_file("/assets/config.js")
-
         def update_config_contents(content):
             # Replace the empty apiKey value with the new API key in the config file
-            key_replaced = content.replace("apiKey: '',", f"
+            key_replaced = content.replace("apiKey: '',", f"apiKey: '{api_key}',")
 
-apiKey: '{api_key}',")
             return key_replaced
+
+        # Retrieve the specific configuration JavaScript file
+        config_file = self.get_file("/assets/config.js")
 
         # Update the config file with the new API key
         config_file.update_contents(update_config_contents)
@@ -152,12 +156,16 @@ apiKey: '{api_key}',")
 Usage Example:
 
 ```python
-from botasaurus import *
+from botasaurus.browser import browser, Driver
+from chrome_extension_python import Extension
 
 @browser(
-    extensions=[Capsolver(api_key="CAP-MY_KEY")],
-)  
-def open_chrome(driver: AntiDetectDriver, data):
+    extensions=[
+        # Simply pass the Chrome Extension Link
+        Capsolver(api_key="CAP-MY_KEY")
+    ],
+)
+def open_chrome(driver: Driver, data):
     driver.get("https://recaptcha-demo.appspot.com/recaptcha-v2-checkbox.php")
     driver.prompt()
 

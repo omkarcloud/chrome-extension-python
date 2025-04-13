@@ -9,6 +9,22 @@ import os
 from urllib.parse import unquote
 from .package_storage import PackageStorage
 
+def _get_latest_version_from_inet():
+        try:
+            response = get(
+                'https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json')
+            data = response.json()
+            stable_version = data["channels"]["Stable"]["version"]
+            return stable_version
+        except Exception as e:
+            return '135.0.7049.84'
+
+def get_latest_version():
+    version = PackageStorage.get_item("__version", None)
+    if not version:
+        version = _get_latest_version_from_inet()
+        PackageStorage.set_item("__version", version)
+    return version
 
 def relative_path(path, goback=0):
     levels = [".."] * (goback + -1)
@@ -16,9 +32,8 @@ def relative_path(path, goback=0):
 
 
 def download_and_unzip_chrome_extension(extension_id, download_dir):
-    chrome_version = "120.0.0.0"
+    chrome_version = get_latest_version()
     crx_url = f"https://clients2.google.com/service/update2/crx?response=redirect&prodversion={chrome_version}&x=id%3D{extension_id}%26installsource%3Dondemand%26uc&acceptformat=crx2,crx3"
-
     response = get(crx_url)
 
     if response.status_code != 200:

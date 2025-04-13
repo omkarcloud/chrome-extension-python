@@ -18,7 +18,7 @@ def get_description():
 
 setup(
     name="chrome_extension_python",
-    version="1.0.1",
+    version='1.0.2',
     author="Chetan Jain",
     author_email="chetan@omkar.cloud",
     description="Chrome Extension Python allows you to easily integrate Chrome extensions in web automation frameworks like Botasaurus, Selenium, and Playwright.",
